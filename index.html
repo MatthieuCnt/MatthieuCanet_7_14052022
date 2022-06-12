@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href="assets/favicon.png" />
+		<link
+			href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+			rel="stylesheet"
+		/>
+		<link href="style/style.css" rel="stylesheet" type="text/css" />
+
+		<script
+			src="https://kit.fontawesome.com/5f95a73160.js"
+			crossorigin="anonymous"
+		></script>
+		<title>Les petits plats</title>
+		<script src="scripts/functions.js"></script>
+		<script type="module" src="scripts/index.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<a href="index.html">
+					<img src="assets/image/logo.svg" class="logo" alt="logo" />
+				</a>
+			</header>
+			<main>
+				<form class="search_form" id="form">
+					<input
+						class="search_input"
+						type="text"
+						placeholder="Rechercher une recette"
+					/>
+					<i class="fas fa-search"></i>
+				</form>
+				<section class="filter">
+					<div class="filter_style ingredients">
+						<div class="filter_style_inside">
+							<input
+								class="filter_input ingredients"
+								placeholder="Ingrédients"
+							/>
+							<i class="fas fa-chevron-down"></i>
+						</div>
+						<ul class="dropdown">
+							<li>1</li>
+							<li>2</li>
+							<li>3</li>
+							<li>4</li>
+							<li>5</li>
+							<li>6</li>
+							<li>7</li>
+							<li>8</li>
+							<li>9</li>
+							<li>10</li>
+						</ul>
+					</div>
+
+					<div class="filter_style appareils">
+						<div class="filter_style_inside">
+							<input
+								class="filter_input appareils"
+								placeholder="Appareils"
+							/>
+							<i class="fas fa-chevron-down"></i>
+						</div>
+						<ul class="dropdown">
+							<li>1</li>
+							<li>2</li>
+							<li>3</li>
+							<li>4</li>
+							<li>5</li>
+							<li>6</li>
+							<li>7</li>
+							<li>8</li>
+							<li>9</li>
+							<li>10</li>
+						</ul>
+					</div>
+					<div class="filter_style ustenciles">
+						<div class="filter_style_inside">
+							<input
+								class="filter_input ustenciles"
+								placeholder="Ustenciles"
+							/>
+							<i class="fas fa-chevron-down"></i>
+						</div>
+						<ul class="dropdown">
+							<li>1</li>
+							<li>2</li>
+							<li>3</li>
+							<li>4</li>
+							<li>5</li>
+							<li>6</li>
+							<li>7</li>
+							<li>8</li>
+							<li>9</li>
+							<li>10</li>
+						</ul>
+					</div>
+				</section>
+				<section class="all_recipes"></section>
+			</main>
+			<script type="module" src="modules/recipes.js"></script>
+		</div>
+	</body>
+</html>

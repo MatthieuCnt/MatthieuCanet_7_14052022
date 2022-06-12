@@ -1,0 +1,186 @@
+/* header section */
+
+.container {
+	margin: 0 auto;
+	width: 90vw;
+}
+
+header {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+.logo {
+	width: 300px;
+	margin-top: 20px;
+}
+
+body {
+	font-family: 'Lato', sans-serif;
+}
+
+main {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.search_form {
+	display: flex;
+	margin-top: 20px;
+}
+
+.search_input {
+	height: 50px;
+	width: 100%;
+	background-color: #e7e7e7;
+	border: none;
+	border-radius: 3px;
+	padding-left: 20px;
+}
+
+.search_input::placeholder {
+	color: #a29c9c;
+}
+
+.filter {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 40px;
+}
+
+.fas.fa-search {
+	font-size: 25px;
+	position: relative;
+	align-self: center;
+	right: 40px;
+}
+.ingredients {
+	background-color: #3282f7;
+}
+
+.appareils {
+	background-color: #68d9a4;
+}
+
+.ustenciles {
+	background-color: #ed6454;
+}
+
+.filter_style {
+	cursor: pointer;
+	width: 120px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 10px;
+	color: white;
+	height: 60px;
+	border-radius: 3px;
+	margin-right: 20px;
+}
+
+.filter_style_inside {
+	display: flex;
+}
+
+.filter_input {
+	border: none;
+	width: 80px;
+}
+
+input::placeholder {
+	color: white;
+	opacity: 1;
+}
+
+.dropdown {
+	visibility: hidden;
+}
+
+.fa-chevron-down {
+	margin-left: 20px;
+}
+
+.all_recipes {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin-top: 20px;
+}
+
+.recipes {
+	flex-basis: 30%;
+	border-radius: 5px;
+	background-color: #e7e7e7;
+	height: 300px;
+	margin-bottom: 20px;
+}
+
+.recipes_img {
+	width: 100%;
+	height: 50%;
+	background-color: #c7bebe;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.recipes_text {
+	display: flex;
+	align-items: baseline;
+	flex-direction: column;
+	height: 50%;
+	padding: 0 1rem;
+}
+
+.first_part {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.recipes_title {
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.far {
+	font-weight: bold;
+}
+
+.fa-clock::before {
+	font-weight: initial;
+	margin-right: 5px;
+}
+
+.second_part {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	height: 100%;
+	font-size: 10px;
+}
+
+.list_ingredient {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	font-weight: bold;
+	padding: 0;
+}
+
+.ingredients_recipes {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.description_recipes {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 6;
+	overflow: hidden;
+	width: 50%;
+}
