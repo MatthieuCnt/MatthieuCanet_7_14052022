@@ -6,6 +6,7 @@ console.log(recipesArray);
 let ingredientsArray = [];
 
 for (let i = 0; i < recipes.length; i++) {
+	//addIngredient(recipes[i].ingredients);
 	recipes[i].ingredients.forEach(ingredient => {
 		console.log(ingredient.name);
 		ingredientsArray.push(ingredient.ingredient);
@@ -19,6 +20,7 @@ function create_article(recipesArray) {
 	//ingredientArray
 
 	for (let i = 0; i < recipesArray.length; i++) {
+		// boucle ingredients / ustencils / appareils
 		const article = document.createElement('article');
 		article.classList.add('recipes');
 		article.id = 'recipes' + i;
