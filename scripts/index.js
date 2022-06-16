@@ -3,8 +3,21 @@ let recipesArray = Object.entries(recipes);
 
 console.log(recipesArray);
 
+let ingredientsArray = [];
+
+for (let i = 0; i < recipes.length; i++) {
+	recipes[i].ingredients.forEach(ingredient => {
+		console.log(ingredient.name);
+		ingredientsArray.push(ingredient.ingredient);
+	});
+}
+console.log(ingredientsArray);
+console.log(recipes);
+
 // INSERT ELEMENT IN HTML
 function create_article(recipesArray) {
+	//ingredientArray
+
 	for (let i = 0; i < recipesArray.length; i++) {
 		const article = document.createElement('article');
 		article.classList.add('recipes');
