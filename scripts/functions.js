@@ -20,7 +20,7 @@ function ingredientsList(recipes) {
 			}
 		}
 	}
-	console.log(ingredientsArray);
+	console.log(ingredientsArray); 
 	return ingredientsArray;
 }
 

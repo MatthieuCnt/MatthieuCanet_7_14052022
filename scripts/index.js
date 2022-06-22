@@ -15,6 +15,28 @@ for (let i = 0; i < recipes.length; i++) {
 console.log(ingredientsArray);
 console.log(recipes);
 
+let ustensilsArray = [];
+
+for (let i = 0; i < recipes.length; i++) {
+	//addUstensil(recipes[i].ustensils);
+	recipes[i].ustencils.forEach(ustencil => {
+		console.log(ustencil.name);
+		ustensilsArray.push(ustensils);
+	})
+}
+console.log(ustensilsArray);
+
+let appliancesArray = [];
+
+for (let i = 0; i < recipes.length; i++) {
+	//addAppliances(recipes[i].appliances);
+	recipes[i].appliances.forEach(appliance => {
+		console.log(appliance.name);
+		appliancesArray.push(appliance);
+	})
+}
+
+
 // INSERT ELEMENT IN HTML
 function create_article(recipesArray) {
 	//ingredientArray
