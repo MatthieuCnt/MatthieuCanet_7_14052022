@@ -1,41 +1,42 @@
 import { recipes } from '../modules/recipes.js';
 let recipesArray = Object.entries(recipes);
 
-console.log(recipesArray);
-
 let ingredientsArray = [];
 
 for (let i = 0; i < recipes.length; i++) {
 	//addIngredient(recipes[i].ingredients);
 	recipes[i].ingredients.forEach(ingredient => {
-		console.log(ingredient.name);
 		ingredientsArray.push(ingredient.ingredient);
 	});
 }
-console.log(ingredientsArray);
 console.log(recipes);
+
+ingredientsArray = sort(ingredientsArray);
+
+console.log(ingredientsArray);
 
 let ustensilsArray = [];
 
 for (let i = 0; i < recipes.length; i++) {
 	//addUstensil(recipes[i].ustensils);
-	recipes[i].ustencils.forEach(ustencil => {
-		console.log(ustencil.name);
-		ustensilsArray.push(ustensils);
-	})
+	recipes[i].ustensils.forEach(ustensil => {
+		ustensilsArray.push(ustensil);
+	});
 }
+ustensilsArray = sort(ustensilsArray);
+
 console.log(ustensilsArray);
 
 let appliancesArray = [];
 
 for (let i = 0; i < recipes.length; i++) {
 	//addAppliances(recipes[i].appliances);
-	recipes[i].appliances.forEach(appliance => {
-		console.log(appliance.name);
-		appliancesArray.push(appliance);
-	})
-}
 
+	appliancesArray.push(recipes[i].appliance);
+}
+appliancesArray = sort(appliancesArray);
+
+console.log(appliancesArray);
 
 // INSERT ELEMENT IN HTML
 function create_article(recipesArray) {
@@ -111,9 +112,3 @@ function create_article(recipesArray) {
 }
 
 create_article(recipesArray);
-
-ingredientsList(recipesArray);
-
-ustensilsList(recipesArray);
-
-appliancesList(recipesArray);
