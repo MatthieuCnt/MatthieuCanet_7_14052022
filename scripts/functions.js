@@ -20,4 +20,16 @@ function showIngredients(recipes) {
 	return text;
 }
 
-//function showDropDown
+function showDropDownIngredients(ingredients) {
+	//const li = document.createElement('li');
+	var ul = document.getElementById('ulId');
+
+	if (ul == null) {
+	} else {
+		for (let i = 0; i < ingredients.length; i++) {
+			var li = document.createElement('li');
+			li.appendChild(document.createTextNode(ingredients[i]));
+			ul.appendChild(li);
+		}
+	}
+}
