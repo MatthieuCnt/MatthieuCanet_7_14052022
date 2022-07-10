@@ -3,19 +3,14 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/png" href="assets/favicon.png" />
-		<link
-			href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
-			rel="stylesheet"
-		/>
-		<link href="style/style.css" rel="stylesheet" type="text/css" />
-
 		<script
 			src="https://kit.fontawesome.com/5f95a73160.js"
 			crossorigin="anonymous"
 		></script>
+		<link href="style/style.css" rel="stylesheet" type="text/css" />
+		<link href="style/normalizer.css" rel="stylesheet" type="text/css" />
+
 		<title>Les petits plats</title>
-		<script src="scripts/functions.js"></script>
-		<script type="module" src="scripts/index.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -29,7 +24,13 @@
 				<section class="filter" id="section"></section>
 				<section class="all_recipes"></section>
 			</main>
-			<script type="module" src="modules/recipes.js"></script>
+			<script type="module" src="modules/recipes.json"></script>
+			<script src="scripts/functions.js"></script>
+			<script type="module" src="scripts/index.js"></script>
+			<script src="mvc/config/configMVC.js"></script>
+			<script src="mvc/controllers/controllers.js"></script>
+			<script src="mvc/model/model.js"></script>
+			<script src="mvc/view/view.js"></script>
 		</div>
 	</body>
 </html>

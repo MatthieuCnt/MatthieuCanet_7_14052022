@@ -82,8 +82,42 @@ main {
 	margin-right: 20px;
 }
 
+.open_drop {
+	display: none;
+	width: 42rem;
+	padding: 0 10px;
+	border-radius: 3px;
+	margin-right: 20px;
+	background-color: #3282f7;
+	color: white;
+	z-index: 2;
+}
+
+.open_drop_app {
+	display: none;
+	width: 42rem;
+	padding: 0 10px;
+	border-radius: 3px;
+	margin-right: 20px;
+	background-color: #68d9a4;
+	color: white;
+	z-index: 2;
+}
+
+.open_drop_ust {
+	display: none;
+	width: 42rem;
+	padding: 0 10px;
+	border-radius: 3px;
+	margin-right: 20px;
+	background-color: #ed6454;
+	color: white;
+	z-index: 2;
+}
+
 .filter_style_inside {
 	display: flex;
+	justify-content: space-between;
 }
 
 .filter_input {
@@ -91,17 +125,73 @@ main {
 	width: 80px;
 }
 
+.filter_input_drop {
+	border: none;
+	background-color: #3282f7;
+	padding: 20px;
+	font-size: 18px;
+}
+
+.filter_input_drop_app {
+	border: none;
+	background-color: #68d9a4;
+	padding: 20px;
+	font-size: 18px;
+}
+
+.filter_input_drop_ust {
+	border: none;
+	background-color: #ed6454;
+	padding: 20px;
+	font-size: 18px;
+}
+
+.filter_input_drop::placeholder {
+	color: rgba(255, 255, 255, 0.693);
+}
 input::placeholder {
 	color: white;
 	opacity: 1;
 }
 
-.dropdown {
-	visibility: hidden;
+.dropdown_ing {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	writing-mode: vertical-lr;
+	padding: 20px 50px 0 0;
+}
+
+.dropdown_app {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	writing-mode: vertical-lr;
+	padding: 20px 50px 0 0;
+}
+
+.dropdown_ust {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	writing-mode: vertical-lr;
+	padding: 20px 50px 0 0;
+}
+
+li {
+	padding: 0px 60px 20px 20px;
+	writing-mode: horizontal-tb;
 }
 
 .fa-chevron-down {
 	margin-left: 20px;
+}
+
+.fa-chevron-up {
+	display: flex;
+	align-items: center;
+	margin-right: 20px;
+	align-self: center;
 }
 
 .all_recipes {
