@@ -7,7 +7,7 @@ function sort(list) {
 	return filteredArray;
 }
 
-function showIngredients(recipes) {
+/*function showIngredients(recipes) {
 	let text = '';
 	if (recipes.unit != null) {
 		text =
@@ -18,7 +18,7 @@ function showIngredients(recipes) {
 		text = recipes.ingredient;
 	}
 	return text;
-}
+}*/
 
 /* Showing the dropdown menu for the ingredients. */
 function showDropDownIngredients(ingredientsArray) {
@@ -86,21 +86,57 @@ function closeDropDownUstensils() {
 	document.getElementById('div_style_ustensils').style.display = 'flex';
 	document.getElementById('openDropUst').style.display = 'none';
 }
-
-function search() {
+/*
+function search(recipes, searchElement) {
 	//Create input and i(loup).
 	const searchInput = document.createElement('input');
 	searchInput.classList.add('search_input');
 	searchInput.type = 'text';
 	searchInput.placeholder = 'Rechercher une recette';
+	searchInput.id = 'search';
+	searchInput.addEventListener('input', validate);
+function validate() {
+	if (input.value.length >= 3) {
+		showDropDownIngredients(searchElement);
+		allRecipesFilter(recipes, input.value);
+	}
+} 
 	document.getElementById('form').appendChild(searchInput);
 
 	const fas_search = document.createElement('i');
 	fas_search.className = 'fas fa-search';
 	document.getElementById('form').appendChild(fas_search);
+}*/
+
+function showRecipesFilter(Element) {
+	const allRecipes = document.getElementById('allRecipes');
+	if ((allRecipes.value = Element)) {
+		allRecipesFilter();
+	}
 }
 
-function ingredients() {
+function allRecipesFilter(recipes, inputElement) {
+	let recipesFiltered = [];
+	//const recipesFiltered = recipesArray.toLowerCase();
+
+	for (let i = 0; i < recipes.length; i++) {
+		const recipesLower = recipes[i].name.toLowerCase();
+		if (recipesLower.includes(inputElement)) {
+			recipesFiltered.push(recipes[i]);
+		} else {
+			recipes[i].ingredients.some(Element => {
+				const elementLower = Element.ingredient.toLowerCase();
+				if (elementLower.includes(inputElement)) {
+					recipesFiltered.push(recipes[i]);
+					return 'true';
+				}
+			});
+		}
+	}
+	document.getElementById('allRecipes').innerHTML = '';
+	allRecipes(recipesFiltered);
+}
+/*function ingredients(ingredientElement) {
 	const filter_style = document.createElement('div');
 	filter_style.className = 'filter_style ingredients';
 	filter_style.id = 'div_style';
@@ -125,7 +161,7 @@ function ingredients() {
 	const open_dropdown_chevron = document.createElement('i');
 	open_dropdown_chevron.className = 'fas fa-chevron-up';
 	open_dropdown_chevron.addEventListener('click', function () {
-		closeDropDownIngredients(ingredientsArray);
+		closeDropDownIngredients(ingredientElement);
 	});
 	document
 		.querySelector('.filter_style_inside')
@@ -144,7 +180,7 @@ function ingredients() {
 	const chevron = document.createElement('i');
 	chevron.className = 'fas fa-chevron-down';
 	chevron.addEventListener('click', function () {
-		showDropDownIngredients(ingredientsArray);
+		showDropDownIngredients(ingredientElement);
 	});
 	document.querySelector('.filter_style_inside').appendChild(chevron);
 
@@ -154,7 +190,7 @@ function ingredients() {
 	document.querySelector('.open_drop').appendChild(ul);
 }
 
-function appliances() {
+function appliances(appliancesElement) {
 	//Appliances
 	const filter_style_appareils = document.createElement('div');
 	filter_style_appareils.className = 'filter_style appareils';
@@ -198,7 +234,7 @@ function appliances() {
 	const chevron_app = document.createElement('i');
 	chevron_app.className = 'fas fa-chevron-down ';
 	chevron_app.addEventListener('click', function () {
-		showDropDownAppliances(appliancesArray);
+		showDropDownAppliances(appliancesElement);
 	});
 	document.getElementById('filterInside').appendChild(chevron_app);
 
@@ -208,7 +244,7 @@ function appliances() {
 	document.getElementById('openDropApp').appendChild(ul_app);
 }
 
-function ustencils() {
+function ustencils(ustensilsElement) {
 	const filter_style_ustensils = document.createElement('div');
 	filter_style_ustensils.className = 'filter_style ustenciles';
 	filter_style_ustensils.id = 'div_style_ustensils';
@@ -251,7 +287,7 @@ function ustencils() {
 	const chevron_ust = document.createElement('i');
 	chevron_ust.className = 'fas fa-chevron-down ';
 	chevron_ust.addEventListener('click', function () {
-		showDropDownUstensils(ustensilsArray);
+		showDropDownUstensils(ustensilsElement);
 	});
 	document.getElementById('filterInsideUst').appendChild(chevron_ust);
 
@@ -328,4 +364,4 @@ function allRecipes(recipes) {
 			.getElementById('recipes_ingredient' + i)
 			.appendChild(description);
 	}
-}
+}*/
