@@ -12,13 +12,14 @@ class RecipesView extends Event {
 		input.type = 'text';
 		input.placeholder = 'Rechercher une recette';
 		input.id = 'search';
-		/*searchInput.addEventListener('input', validate);
-		function validate() {
-			if (input.value.length >= 3) {
-				showDropDownIngredients(searchElement);
-				allRecipesFilter(recipes, input.value);
-			}
-		}*/
+
+		input.addEventListener('input', e => {
+			let value = e.target.value;
+			this.event('searchBar', {
+				value: value,
+			});
+		});
+
 		document.getElementById('form').appendChild(input);
 
 		const fas_search = document.createElement('i');
@@ -236,15 +237,15 @@ class RecipesView extends Event {
 				.getElementById('recipes_ingredient' + i)
 				.appendChild(ul_ingredients);
 
-			recipes[i].ingredients.forEach(Element => {
-				const ingredients = document.createElement('li');
-				ingredients.classList.add('ingredients_recipes');
-				ingredients.innerHTML = showIngredients(Element);
+			//recipes[i].ingredients.forEach(Element => {
+			const ingredients = document.createElement('li');
+			ingredients.classList.add('ingredients_recipes');
+			ingredients.innerHTML = showIngredients(Element);
 
-				document
-					.getElementById('list_ingredient' + i)
-					.appendChild(ingredients);
-			});
+			document
+				.getElementById('list_ingredient' + i)
+				.appendChild(ingredients);
+			//});
 
 			function showIngredients(recipes) {
 				let text = '';

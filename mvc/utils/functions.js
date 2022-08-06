@@ -1,5 +1,5 @@
 //Trier les listes afin de virer les doublons et tout mettre en minuscule
-function sort(list) {
+/*function sort(list) {
 	let filteredArray = [];
 	list = list.map(list => list.toLowerCase());
 	filteredArray = list.filter((ele, pos) => list.indexOf(ele) == pos);
@@ -7,7 +7,7 @@ function sort(list) {
 	return filteredArray;
 }
 
-/*function showIngredients(recipes) {
+function showIngredients(recipes) {
 	let text = '';
 	if (recipes.unit != null) {
 		text =
@@ -18,9 +18,9 @@ function sort(list) {
 		text = recipes.ingredient;
 	}
 	return text;
-}*/
+}
 
-/* Showing the dropdown menu for the ingredients. */
+ Showing the dropdown menu for the ingredients. 
 function showDropDownIngredients(ingredientsArray) {
 	document.getElementById('div_style').style.display = 'none';
 	document.getElementById('openDrop').style.display = 'block';
@@ -37,13 +37,13 @@ function showDropDownIngredients(ingredientsArray) {
 	}
 }
 
-/* Closing the dropdown menu for the ingredients. */
+ Closing the dropdown menu for the ingredients. 
 function closeDropDownIngredients(ingredientsArray) {
 	document.getElementById('div_style').style.display = 'flex';
 	document.getElementById('openDrop').style.display = 'none';
 }
 
-/* Showing the dropdown menu for the appliances. */
+Showing the dropdown menu for the appliances. 
 function showDropDownAppliances(appliancesArray) {
 	document.getElementById('div_style_appareils').style.display = 'none';
 	document.getElementById('openDropApp').style.display = 'block';
@@ -60,7 +60,7 @@ function showDropDownAppliances(appliancesArray) {
 	}
 }
 
-/* Closing the dropdown menu for the appliances. */
+ Closing the dropdown menu for the appliances. 
 function closeDropDownAppliances() {
 	document.getElementById('div_style_appareils').style.display = 'flex';
 	document.getElementById('openDropApp').style.display = 'none';
@@ -86,7 +86,7 @@ function closeDropDownUstensils() {
 	document.getElementById('div_style_ustensils').style.display = 'flex';
 	document.getElementById('openDropUst').style.display = 'none';
 }
-/*
+
 function search(recipes, searchElement) {
 	//Create input and i(loup).
 	const searchInput = document.createElement('input');
@@ -94,7 +94,7 @@ function search(recipes, searchElement) {
 	searchInput.type = 'text';
 	searchInput.placeholder = 'Rechercher une recette';
 	searchInput.id = 'search';
-	searchInput.addEventListener('input', validate);
+searchInput.addEventListener('input', validate);
 function validate() {
 	if (input.value.length >= 3) {
 		showDropDownIngredients(searchElement);
@@ -106,7 +106,7 @@ function validate() {
 	const fas_search = document.createElement('i');
 	fas_search.className = 'fas fa-search';
 	document.getElementById('form').appendChild(fas_search);
-}*/
+}
 
 function showRecipesFilter(Element) {
 	const allRecipes = document.getElementById('allRecipes');
@@ -136,7 +136,7 @@ function allRecipesFilter(recipes, inputElement) {
 	document.getElementById('allRecipes').innerHTML = '';
 	allRecipes(recipesFiltered);
 }
-/*function ingredients(ingredientElement) {
+function ingredients(ingredientElement) {
 	const filter_style = document.createElement('div');
 	filter_style.className = 'filter_style ingredients';
 	filter_style.id = 'div_style';
