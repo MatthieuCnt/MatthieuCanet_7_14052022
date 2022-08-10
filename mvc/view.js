@@ -6,6 +6,9 @@ class RecipesView extends Event {
 	}
 
 	render({ recipes }) {
+		document.getElementById('form').innerHTML = '';
+		document.getElementById('section').innerHTML = '';
+		document.getElementById('allRecipes').innerHTML = '';
 		console.log(recipes);
 		const input = document.createElement('input');
 		input.classList.add('search_input');
@@ -237,15 +240,15 @@ class RecipesView extends Event {
 				.getElementById('recipes_ingredient' + i)
 				.appendChild(ul_ingredients);
 
-			//recipes[i].ingredients.forEach(Element => {
-			const ingredients = document.createElement('li');
-			ingredients.classList.add('ingredients_recipes');
-			ingredients.innerHTML = showIngredients(Element);
+			recipes[i].ingredients.forEach(Element => {
+				const ingredients = document.createElement('li');
+				ingredients.classList.add('ingredients_recipes');
+				ingredients.innerHTML = showIngredients(Element);
 
-			document
-				.getElementById('list_ingredient' + i)
-				.appendChild(ingredients);
-			//});
+				document
+					.getElementById('list_ingredient' + i)
+					.appendChild(ingredients);
+			});
 
 			function showIngredients(recipes) {
 				let text = '';

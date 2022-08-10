@@ -18,27 +18,26 @@ class RecipesModel extends Event {
 	searchRecipes(value) {
 		// j'enregistre ma recherche
 		this.searchBar = value;
-		this.updatedRecipes();
+		this.updatedRecipes(this.searchBar);
 	}
 
-	updatedRecipes() {
+	updatedRecipes(filter) {
 		this.filteredRecipes = [];
+		/* Looping through the array of recipes. */
 		this.allRecipes.forEach(recipe => {
-			const recipesName = recipe.name.toLowerCase(); // chercher dans les recette si value est dans le titre ou la description ou les ingrédients (this.search)
-			if (recipesName.includes(this.searchBar)) {
-				this.filteredRecipes.push(this.searchBar);
-
-				console.log(this.searchBar);
+			const recipesName = recipe.name.toLowerCase();
+			/* Checking if the recipe name includes the search bar value. */
+			if (filter == null) {
+				this.filteredRecipes.push(recipe);
+			} else if (recipesName.includes(filter)) {
+				/* Pushing the value of the search bar into the filteredRecipes array. */
+				this.filteredRecipes.push(recipe);
+				console.log(filter);
+				console.log(this.filteredRecipes);
 			}
-
-			this.filteredRecipes.push(recipe);
 		});
-		this.RemoveRender();
-		this.eventChange();
-	}
 
-	RemoveRender() {
-		RecipesView.replace();
+		this.eventChange();
 	}
 
 	eventChange() {
