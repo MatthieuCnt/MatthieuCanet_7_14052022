@@ -11,10 +11,17 @@ class RecipesController {
 		this.view = view;
 
 		/* Listening for a change event on the model and then calling the view's render method with the data. */
-
+		model.on('load', data => view.renderHeader(data));
 		model.on('change', data => view.render(data));
 
 		view.on('searchBar', ({ value }) => model.searchRecipes(value));
+		view.on('searchChevron', recipes => model.searchChevron(recipes));
+		view.on('searchIngredients', ({ value }) =>
+			model.searchIngredients(value),
+		);
+
+		view.on('searchChevronApp', recipes => model.searchChevronApp(recipes));
+		view.on('searchChevronUst', recipes => model.searchChevronUst(recipes));
 	}
 
 	load() {

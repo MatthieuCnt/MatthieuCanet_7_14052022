@@ -5,10 +5,10 @@ class RecipesView extends Event {
 		super();
 	}
 
-	render({ recipes }) {
+	renderHeader({ recipes }) {
 		document.getElementById('form').innerHTML = '';
 		document.getElementById('section').innerHTML = '';
-		document.getElementById('allRecipes').innerHTML = '';
+
 		console.log(recipes);
 		const input = document.createElement('input');
 		input.classList.add('search_input');
@@ -17,12 +17,12 @@ class RecipesView extends Event {
 		input.id = 'search';
 
 		input.addEventListener('input', e => {
-			let value = e.target.value;
-			this.event('searchBar', {
-				value: value,
-			});
+			if (e.target.value.length >= 3) {
+				this.event('searchBar', {
+					value: e.target.value,
+				});
+			}
 		});
-
 		document.getElementById('form').appendChild(input);
 
 		const fas_search = document.createElement('i');
@@ -54,7 +54,8 @@ class RecipesView extends Event {
 		const open_dropdown_chevron = document.createElement('i');
 		open_dropdown_chevron.className = 'fas fa-chevron-up';
 		open_dropdown_chevron.addEventListener('click', function () {
-			closeDropDownIngredients(ingredientElement);
+			document.getElementById('div_style').style.display = 'flex';
+			document.getElementById('openDrop').style.display = 'none';
 		});
 		document
 			.querySelector('.filter_style_inside')
@@ -68,15 +69,31 @@ class RecipesView extends Event {
 		const filter_input = document.createElement('input');
 		filter_input.className = 'filter_input ingredients';
 		filter_input.placeholder = 'Ingrédients';
+		filter_input.addEventListener('keyup', e => {
+			if (e.target.value.length >= 3) {
+				this.event('searchIngredients', {
+					value: e.target.value,
+				});
+			}
+		});
 		document
 			.querySelector('.filter_style_inside')
 			.appendChild(filter_input);
 
+		const open_tag = document.createElement('div');
+		open_tag.className = 'open_tag';
+		open_tag.id = 'openTag';
+		open_tag.innerHTML = 'toto'; //filter_input.value;
+		document.getElementById('section').appendChild(open_tag);
+
 		const chevron = document.createElement('i');
 		chevron.className = 'fas fa-chevron-down';
-		chevron.addEventListener('click', function () {
-			showDropDownIngredients(ingredientElement);
+		chevron.addEventListener('click', e => {
+			this.event('searchChevron', {
+				recipes: recipes,
+			});
 		});
+
 		document.querySelector('.filter_style_inside').appendChild(chevron);
 
 		const ul = document.createElement('ul');
@@ -108,7 +125,9 @@ class RecipesView extends Event {
 		const dropdown_chevron_app = document.createElement('i');
 		dropdown_chevron_app.className = 'fas fa-chevron-up';
 		dropdown_chevron_app.addEventListener('click', function () {
-			closeDropDownAppliances();
+			document.getElementById('div_style_appareils').style.display =
+				'flex';
+			document.getElementById('openDropApp').style.display = 'none';
 		});
 		document.getElementById('DropDivApp').appendChild(dropdown_chevron_app);
 
@@ -126,8 +145,10 @@ class RecipesView extends Event {
 
 		const chevron_app = document.createElement('i');
 		chevron_app.className = 'fas fa-chevron-down ';
-		chevron_app.addEventListener('click', function () {
-			showDropDownAppliances(appliancesElement);
+		chevron_app.addEventListener('click', e => {
+			this.event('searchChevronApp', {
+				recipes: recipes,
+			});
 		});
 		document.getElementById('filterInside').appendChild(chevron_app);
 
@@ -159,7 +180,9 @@ class RecipesView extends Event {
 		const dropdown_chevron_ust = document.createElement('i');
 		dropdown_chevron_ust.className = 'fas fa-chevron-up';
 		dropdown_chevron_ust.addEventListener('click', function () {
-			closeDropDownUstensils();
+			document.getElementById('div_style_ustensils').style.display =
+				'flex';
+			document.getElementById('openDropUst').style.display = 'none';
 		});
 		document.getElementById('DropDivUst').appendChild(dropdown_chevron_ust);
 
@@ -179,8 +202,10 @@ class RecipesView extends Event {
 
 		const chevron_ust = document.createElement('i');
 		chevron_ust.className = 'fas fa-chevron-down ';
-		chevron_ust.addEventListener('click', function () {
-			showDropDownUstensils(ustensilsElement);
+		chevron_ust.addEventListener('click', e => {
+			this.event('searchChevronUst', {
+				recipes: recipes,
+			});
 		});
 		document.getElementById('filterInsideUst').appendChild(chevron_ust);
 
@@ -188,7 +213,9 @@ class RecipesView extends Event {
 		ul_ust.className = 'dropdown_ust';
 		ul_ust.id = 'ulIdUst';
 		document.getElementById('openDropUst').appendChild(ul_ust);
-
+	}
+	render({ recipes }) {
+		document.getElementById('allRecipes').innerHTML = '';
 		for (let i = 0; i < recipes.length; i++) {
 			const article = document.createElement('article');
 			article.classList.add('recipes');

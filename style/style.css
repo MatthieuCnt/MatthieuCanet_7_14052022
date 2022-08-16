@@ -82,6 +82,14 @@ main {
 	margin-right: 20px;
 }
 
+.open_tag {
+	display: none;
+	width: 8rem;
+	border-radius: 3px;
+	color: white;
+	background-color: #3282f7;
+}
+
 .open_drop {
 	display: none;
 	width: 42rem;
@@ -195,17 +203,16 @@ li {
 }
 
 .all_recipes {
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 50px;
 	margin-top: 20px;
 }
 
 .recipes {
-	flex-basis: 30%;
 	border-radius: 5px;
 	background-color: #e7e7e7;
-	height: 300px;
+	height: 350px;
 	margin-bottom: 20px;
 }
 
