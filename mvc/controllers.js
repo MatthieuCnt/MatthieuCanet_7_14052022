@@ -19,9 +19,12 @@ class RecipesController {
 		view.on('searchIngredients', ({ value }) =>
 			model.searchIngredients(value),
 		);
-
 		view.on('searchChevronApp', recipes => model.searchChevronApp(recipes));
+		view.on('searchAppliances', ({ value }) =>
+			model.searchAppliances(value),
+		);
 		view.on('searchChevronUst', recipes => model.searchChevronUst(recipes));
+		view.on('searchUstensils', ({ value }) => model.searchUstensils(value));
 	}
 
 	load() {

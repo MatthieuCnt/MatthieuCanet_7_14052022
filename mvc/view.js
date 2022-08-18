@@ -9,7 +9,6 @@ class RecipesView extends Event {
 		document.getElementById('form').innerHTML = '';
 		document.getElementById('section').innerHTML = '';
 
-		console.log(recipes);
 		const input = document.createElement('input');
 		input.classList.add('search_input');
 		input.type = 'text';
@@ -33,6 +32,11 @@ class RecipesView extends Event {
 		const filter_style = document.createElement('div');
 		filter_style.className = 'filter_style ingredients';
 		filter_style.id = 'div_style';
+		filter_style.addEventListener('click', e => {
+			this.event('searchChevron', {
+				recipes: recipes,
+			});
+		});
 		document.getElementById('section').appendChild(filter_style);
 
 		const open_dropdown = document.createElement('div');
@@ -47,6 +51,11 @@ class RecipesView extends Event {
 		const open_dropdown_input = document.createElement('input');
 		open_dropdown_input.className = 'filter_input_drop';
 		open_dropdown_input.placeholder = 'Rechercher un ingredient';
+		open_dropdown_input.addEventListener('input', e => {
+			this.event('searchIngredients', {
+				value: e.target.value,
+			});
+		});
 		document
 			.querySelector('.filter_style_inside')
 			.appendChild(open_dropdown_input);
@@ -69,12 +78,10 @@ class RecipesView extends Event {
 		const filter_input = document.createElement('input');
 		filter_input.className = 'filter_input ingredients';
 		filter_input.placeholder = 'Ingrédients';
-		filter_input.addEventListener('keyup', e => {
-			if (e.target.value.length >= 3) {
-				this.event('searchIngredients', {
-					value: e.target.value,
-				});
-			}
+		filter_input.addEventListener('click', e => {
+			this.event('searchchevron', {
+				value: e.target.value,
+			});
 		});
 		document
 			.querySelector('.filter_style_inside')
@@ -83,17 +90,15 @@ class RecipesView extends Event {
 		const open_tag = document.createElement('div');
 		open_tag.className = 'open_tag';
 		open_tag.id = 'openTag';
-		open_tag.innerHTML = 'toto'; //filter_input.value;
-		document.getElementById('section').appendChild(open_tag);
+		document.getElementById('tag').appendChild(open_tag);
+
+		const roundCross = document.createElement('i');
+		roundCross.className = 'fas fa-times-circle';
+		roundCross.id = 'roundCross';
+		document.querySelector('.open_tag').appendChild(roundCross);
 
 		const chevron = document.createElement('i');
 		chevron.className = 'fas fa-chevron-down';
-		chevron.addEventListener('click', e => {
-			this.event('searchChevron', {
-				recipes: recipes,
-			});
-		});
-
 		document.querySelector('.filter_style_inside').appendChild(chevron);
 
 		const ul = document.createElement('ul');
@@ -105,6 +110,12 @@ class RecipesView extends Event {
 		const filter_style_appareils = document.createElement('div');
 		filter_style_appareils.className = 'filter_style appareils';
 		filter_style_appareils.id = 'div_style_appareils';
+		filter_style_appareils.addEventListener('click', e => {
+			this.event('searchChevronApp', {
+				recipes: recipes,
+			});
+		});
+
 		document.getElementById('section').appendChild(filter_style_appareils);
 
 		const open_dropdown_app = document.createElement('div');
@@ -120,6 +131,11 @@ class RecipesView extends Event {
 		const dropdown_input_app = document.createElement('input');
 		dropdown_input_app.className = 'filter_input_drop_app';
 		dropdown_input_app.placeholder = 'Rechercher un appareil';
+		dropdown_input_app.addEventListener('input', e => {
+			this.event('searchAppliances', {
+				value: e.target.value,
+			});
+		});
 		document.getElementById('DropDivApp').appendChild(dropdown_input_app);
 
 		const dropdown_chevron_app = document.createElement('i');
@@ -145,11 +161,6 @@ class RecipesView extends Event {
 
 		const chevron_app = document.createElement('i');
 		chevron_app.className = 'fas fa-chevron-down ';
-		chevron_app.addEventListener('click', e => {
-			this.event('searchChevronApp', {
-				recipes: recipes,
-			});
-		});
 		document.getElementById('filterInside').appendChild(chevron_app);
 
 		const ul_app = document.createElement('ul');
@@ -157,9 +168,15 @@ class RecipesView extends Event {
 		ul_app.id = 'ulIdApp';
 		document.getElementById('openDropApp').appendChild(ul_app);
 
+		//Ustensils
 		const filter_style_ustensils = document.createElement('div');
 		filter_style_ustensils.className = 'filter_style ustenciles';
 		filter_style_ustensils.id = 'div_style_ustensils';
+		filter_style_ustensils.addEventListener('click', e => {
+			this.event('searchChevronUst', {
+				recipes: recipes,
+			});
+		});
 		document.getElementById('section').appendChild(filter_style_ustensils);
 
 		const open_dropdown_ust = document.createElement('div');
@@ -175,6 +192,11 @@ class RecipesView extends Event {
 		const dropdown_input_ust = document.createElement('input');
 		dropdown_input_ust.className = 'filter_input_drop_ust';
 		dropdown_input_ust.placeholder = 'Rechercher un ustencile';
+		dropdown_input_ust.addEventListener('input', e => {
+			this.event('searchUstensils', {
+				value: e.target.value,
+			});
+		});
 		document.getElementById('DropDivUst').appendChild(dropdown_input_ust);
 
 		const dropdown_chevron_ust = document.createElement('i');
@@ -202,11 +224,6 @@ class RecipesView extends Event {
 
 		const chevron_ust = document.createElement('i');
 		chevron_ust.className = 'fas fa-chevron-down ';
-		chevron_ust.addEventListener('click', e => {
-			this.event('searchChevronUst', {
-				recipes: recipes,
-			});
-		});
 		document.getElementById('filterInsideUst').appendChild(chevron_ust);
 
 		const ul_ust = document.createElement('ul');
