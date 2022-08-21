@@ -93,9 +93,9 @@ class RecipesView extends Event {
 		document.getElementById('tag').appendChild(open_tag);
 
 		const roundCross = document.createElement('i');
-		roundCross.className = 'fas fa-times-circle';
+		roundCross.className = 'far fa-times-circle';
 		roundCross.id = 'roundCross';
-		document.querySelector('.open_tag').appendChild(roundCross);
+		document.getElementById('openTag').appendChild(roundCross);
 
 		const chevron = document.createElement('i');
 		chevron.className = 'fas fa-chevron-down';

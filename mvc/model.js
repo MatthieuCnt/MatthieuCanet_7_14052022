@@ -18,6 +18,7 @@ class RecipesModel extends Event {
 
 	setRecipes(recipes) {
 		this.allRecipes = recipes;
+		this.eventLoad();
 		this.updatedRecipes();
 	}
 
@@ -51,7 +52,6 @@ class RecipesModel extends Event {
 				});
 			}
 		});
-		this.eventLoad();
 		this.eventChange();
 	}
 
@@ -72,13 +72,13 @@ class RecipesModel extends Event {
 				const ingredientLower = twice[i].toLowerCase();
 				if (ingredientLower.includes(filter)) {
 					var li = document.createElement('li');
-
 					li.addEventListener('click', function () {
-						document.getElementById('roundCross').style.display =
-							'block';
-						document.getElementById('openTag').style.display =
-							'block';
-						document.getElementById('openTag').innerHTML = twice[i];
+						var cross = document.getElementById('roundCross'),
+							openTag = document.getElementById('openTag');
+
+						openTag.style.display = 'block';
+						openTag.innerHTML = twice[i];
+						openTag.appendChild(cross);
 					});
 					li.appendChild(document.createTextNode(twice[i]));
 					ul.appendChild(li);
@@ -155,6 +155,10 @@ class RecipesModel extends Event {
 			var twice = Array.from(new Set(this.ingredients));
 			for (let i = 0; i < twice.length; i++) {
 				var li = document.createElement('li');
+				li.addEventListener('click', function () {
+					document.getElementById('openTag').style.display = 'block';
+					document.getElementById('openTag').innerHTML = this.click;
+				});
 				li.appendChild(document.createTextNode(twice[i]));
 				ul.appendChild(li);
 			}

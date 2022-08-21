@@ -63,9 +63,8 @@ main {
 	width: max-content;
 }
 
-.fas.fa-times-circle {
-	display: none;
-	color: chocolate;
+.far.fa-times-circle {
+	margin-left: 10px;
 }
 .filter {
 	display: flex;
