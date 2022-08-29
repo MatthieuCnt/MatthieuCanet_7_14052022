@@ -1,24 +1,21 @@
 import { Event } from './utils/event.js';
-import { RecipesController } from './controllers.js';
-import { RecipesView } from './view.js';
+import { match, tiny } from './utils/utils.js'
 
-class RecipesModel extends Event {
+export class RecipesModel extends Event {
 	constructor() {
+		/* Calling the constructor of the parent class. */
 		super();
 		this.allRecipes = [];
 		this.searchBar;
 		this.filteredRecipes = [];
-		this.filterIngredients = [];
 		this.ingredients = [];
-		this.filterAppliances = [];
 		this.appliances = [];
-		this.filterUstensils = [];
 		this.ustensils = [];
+		this.filters = { ingredients: [], appliances: [], ustensils: [] }
 	}
 
 	setRecipes(recipes) {
 		this.allRecipes = recipes;
-		this.eventLoad();
 		this.updatedRecipes();
 	}
 
@@ -28,6 +25,33 @@ class RecipesModel extends Event {
 		this.updatedRecipes(this.searchBar);
 	}
 
+	matchSearch(recipes) {
+		if (this.searchAppliances.lenght <= 2) {
+			// No need to search
+			return true
+		}
+		// Search name
+		if (match(tiny(recipes.name), this.search)) {
+			return true
+		}
+		// Search description
+		if (match(tiny(recipes.description), this.description)) {
+			return true
+		}
+		// Search ingredients
+		if (match(tiny(recipes.ingredients), this.ingredients)) {
+			return true
+		}
+		// Search appliances
+		if (match(tiny(recipes.appliances), this.appliances)) {
+			return true
+		}
+		// Search ustensils
+		if (match(tiny(recipes.ustensils), this.ustensils)) {
+			return true
+	}
+	return false
+}
 	updatedRecipes(filter) {
 		this.filteredRecipes = [];
 		/* Looping through the array of recipes. */
@@ -43,6 +67,7 @@ class RecipesModel extends Event {
 			} else if (recipesDescription.includes(filter)) {
 				this.filteredRecipes.push(recipe);
 			} else {
+				/* A function that loops through the array of ingredients. */
 				recipesIngredient.some(ingredient => {
 					const ingredientLower = ingredient.ingredient.toLowerCase();
 					if (ingredientLower.includes(filter)) {
@@ -56,29 +81,29 @@ class RecipesModel extends Event {
 	}
 
 	searchIngredients(filter) {
-		this.filterIngredients = [];
+		this.filters.ingredients = [];
 
 		this.allRecipes.forEach(recipe => {
 			recipe.ingredients.forEach(ingredient => {
-				this.filterIngredients.push(ingredient.ingredient);
+				this.filters.ingredients.push(ingredient.ingredient);
 			});
 		});
-		var ul = document.getElementById('ulId');
+		var ul = document.getElementById('listIngredients');
 		if (filter == null) {
 		} else {
-			document.getElementById('ulId').innerHTML = '';
-			var twice = Array.from(new Set(this.filterIngredients));
+			document.getElementById('listIngredients').innerHTML = '';
+			var twice = Array.from(new Set(this.filters.ingredients));
 			for (let i = 0; i < twice.length; i++) {
 				const ingredientLower = twice[i].toLowerCase();
 				if (ingredientLower.includes(filter)) {
 					var li = document.createElement('li');
 					li.addEventListener('click', function () {
-						var cross = document.getElementById('roundCross'),
-							openTag = document.getElementById('openTag');
+						var closeTag = document.getElementById('closeTagIngredients'),
+							openTag = document.getElementById('openTagIngredients');
 
 						openTag.style.display = 'block';
 						openTag.innerHTML = twice[i];
-						openTag.appendChild(cross);
+						openTag.appendChild(closeTag);
 					});
 					li.appendChild(document.createTextNode(twice[i]));
 					ul.appendChild(li);
@@ -89,22 +114,25 @@ class RecipesModel extends Event {
 	}
 
 	searchAppliances(filter) {
-		this.filterAppliances = [];
-
+		this.filters.appliances = [];
 		this.allRecipes.forEach(recipe => {
-			this.filterAppliances.push(recipe.appliance);
-			var ul = document.getElementById('ulIdApp');
+			this.filters.appliances.push(recipe.appliance);
+			var ul = document.getElementById('listAppliances');
 			if (filter == null) {
 			} else {
-				document.getElementById('ulIdApp').innerHTML = '';
-				var twice = Array.from(new Set(this.filterAppliances));
+				document.getElementById('listAppliances').innerHTML = '';
+				var twice = Array.from(new Set(this.filters.appliances));
 				for (let i = 0; i < twice.length; i++) {
 					const ingredientLower = twice[i].toLowerCase();
 					if (ingredientLower.includes(filter)) {
 						var li = document.createElement('li');
 						li.addEventListener('click', function () {
-							document.getElementById('openTag').style.display =
-								'block';
+							var closeTag = document.getElementById('closeTagAppliance'),
+							openTag = document.getElementById('openTagAppliance');
+							
+							openTag.style.display = 'block';
+							openTag.innerHTML = twice[i];
+							openTag.appendChild(closeTag);
 						});
 						li.appendChild(document.createTextNode(twice[i]));
 						ul.appendChild(li);
@@ -114,24 +142,31 @@ class RecipesModel extends Event {
 			this.eventChange();
 		});
 	}
-
 	searchUstensils(filter) {
 		this.filterUstensils = [];
 
 		this.allRecipes.forEach(recipe => {
 			recipe.ustensils.forEach(ustensil => {
-				this.filterUstensils.push(ustensil);
+				this.filters.ustensils.push(ustensil);
 			});
 		});
-		var ul = document.getElementById('ulIdUst');
+		var ul = document.getElementById('listUstensils');
 		if (filter == null) {
 		} else {
-			document.getElementById('ulIdUst').innerHTML = '';
-			var twice = Array.from(new Set(this.filterUstensils));
+			document.getElementById('listUstensils').innerHTML = '';
+			var twice = Array.from(new Set(this.filters.ustensils));
 			for (let i = 0; i < twice.length; i++) {
 				const ingredientLower = twice[i].toLowerCase();
 				if (ingredientLower.includes(filter)) {
 					var li = document.createElement('li');
+					li.addEventListener('click', function () {
+						var closeTagUstensils = document.getElementById('closeTagUstensils'),
+						 openTagUstensils = document.getElementById('openTagUstensils');
+						
+						openTagUstensils.style.display = 'block';
+						openTagUstensils.innerHTML = twice[i];
+						openTagUstensils.appendChild(closeTagUstensils);
+					});
 					li.appendChild(document.createTextNode(twice[i]));
 					ul.appendChild(li);
 				}
@@ -139,7 +174,7 @@ class RecipesModel extends Event {
 		}
 		this.eventChange();
 	}
-	searchChevron(recipes) {
+	openIngredients(recipes) {
 		recipes.recipes.forEach(recipe => {
 			recipe.ingredients.forEach(ingredient => {
 				this.ingredients.push(ingredient.ingredient);
@@ -148,44 +183,56 @@ class RecipesModel extends Event {
 		document.getElementById('div_style').style.display = 'none';
 		document.getElementById('openDrop').style.display = 'block';
 
-		var ul = document.getElementById('ulId');
+		var ul = document.getElementById('listIngredients');
 
 		if (ul == null) {
 		} else {
 			var twice = Array.from(new Set(this.ingredients));
 			for (let i = 0; i < twice.length; i++) {
 				var li = document.createElement('li');
+				
 				li.addEventListener('click', function () {
-					document.getElementById('openTag').style.display = 'block';
-					document.getElementById('openTag').innerHTML = this.click;
+					var openTagIngredients = document.getElementById('openTagIngredients'),
+				    closeTagIngredients = document.getElementById('closeTagIngredients');
+
+					openTagIngredients.style.display = 'block';
+					openTagIngredients.innerHTML = this.click;
+					openTagIngredients.appendChild(closeTagIngredients);
 				});
 				li.appendChild(document.createTextNode(twice[i]));
 				ul.appendChild(li);
 			}
 		}
 	}
-
-	searchChevronApp(recipes) {
+	openAppliances(recipes) {
 		recipes.recipes.forEach(recipe => {
 			this.appliances.push(recipe.appliance);
 		});
 		document.getElementById('div_style_appareils').style.display = 'none';
 		document.getElementById('openDropApp').style.display = 'block';
 
-		var ul = document.getElementById('ulIdApp');
+		var ul = document.getElementById('listAppliances');
 
 		if (ul == null) {
 		} else {
 			var twice = Array.from(new Set(this.appliances));
 			for (let i = 0; i < twice.length; i++) {
 				var li = document.createElement('li');
+				li.addEventListener('click', function () {
+					var openTagAppliances = document.getElementById('openTagAppliances'),
+				    closeTagAppliances = document.getElementById('closeTagAppliances');
+
+					openTagAppliances.style.display = 'block';
+					openTagAppliances.innerHTML = this.click;
+					console.log(this.click);
+					openTagAppliances.appendChild(closeTagAppliances);
+				});
 				li.appendChild(document.createTextNode(twice[i]));
 				ul.appendChild(li);
 			}
 		}
 	}
-
-	searchChevronUst(recipes) {
+	openUstensils(recipes) {
 		recipes.recipes.forEach(recipe => {
 			recipe.ustensils.forEach(ustensils => {
 				this.ustensils.push(ustensils);
@@ -194,30 +241,31 @@ class RecipesModel extends Event {
 		document.getElementById('div_style_ustensils').style.display = 'none';
 		document.getElementById('openDropUst').style.display = 'block';
 
-		var ul = document.getElementById('ulIdUst');
+		var ul = document.getElementById('listUstensils');
 
 		if (ul == null) {
 		} else {
 			var twice = Array.from(new Set(this.ustensils));
 			for (let i = 0; i < twice.length; i++) {
 				var li = document.createElement('li');
+				li.addEventListener('click', function () {
+					var openTagUstensils = document.getElementById('openTagUstensils'),
+				    closeTagUstensils = document.getElementById('closeTagUstensils');
+
+					openTagUstensils.style.display = 'block';
+					openTagUstensils.innerHTML = this.click;
+					console.log(this.click);
+					openTagUstensils.appendChild(closeTagUstensils);
+				});
 				li.appendChild(document.createTextNode(twice[i]));
 				ul.appendChild(li);
 			}
 		}
 	}
-
 	eventChange() {
 		this.event('change', {
 			recipes: this.filteredRecipes,
 		});
 	}
-
-	eventLoad() {
-		this.event('load', {
-			recipes: this.filteredRecipes,
-		});
-	}
 }
 
-export { RecipesModel };

@@ -1,14 +1,19 @@
 import { Event } from './utils/event.js';
-
-class RecipesView extends Event {
+/* Creating a class called RecipesView that extends the Event class. */
+export class RecipesView extends Event {
 	constructor() {
 		super();
 	}
+	render({ recipes }) {
 
-	renderHeader({ recipes }) {
+		let allIngredients = new Set()
+		let allAppliances = new Set()
+		let allUstensils = new Set()
+
 		document.getElementById('form').innerHTML = '';
 		document.getElementById('section').innerHTML = '';
-
+		document.getElementById('allRecipes').innerHTML = '';
+		// Create principal Search bare
 		const input = document.createElement('input');
 		input.classList.add('search_input');
 		input.type = 'text';
@@ -24,16 +29,16 @@ class RecipesView extends Event {
 		});
 		document.getElementById('form').appendChild(input);
 
-		const fas_search = document.createElement('i');
-		fas_search.className = 'fas fa-search';
-		document.getElementById('form').appendChild(fas_search);
+		const search_loup = document.createElement('i');
+		search_loup.className = 'fas fa-search';
+		document.getElementById('form').appendChild(search_loup);
 
 		//Create btn ingredient
 		const filter_style = document.createElement('div');
 		filter_style.className = 'filter_style ingredients';
 		filter_style.id = 'div_style';
 		filter_style.addEventListener('click', e => {
-			this.event('searchChevron', {
+			this.event('openIngredients', {
 				recipes: recipes,
 			});
 		});
@@ -79,23 +84,26 @@ class RecipesView extends Event {
 		filter_input.className = 'filter_input ingredients';
 		filter_input.placeholder = 'Ingrédients';
 		filter_input.addEventListener('click', e => {
-			this.event('searchchevron', {
+			this.event('openIngredients', {
 				value: e.target.value,
 			});
 		});
 		document
 			.querySelector('.filter_style_inside')
 			.appendChild(filter_input);
-
-		const open_tag = document.createElement('div');
-		open_tag.className = 'open_tag';
-		open_tag.id = 'openTag';
-		document.getElementById('tag').appendChild(open_tag);
-
-		const roundCross = document.createElement('i');
-		roundCross.className = 'far fa-times-circle';
-		roundCross.id = 'roundCross';
-		document.getElementById('openTag').appendChild(roundCross);
+			// Create ingredients Tag
+			const open_tag_ingredients = document.createElement('div');
+			open_tag_ingredients.className = 'open_tag ingredients';
+			open_tag_ingredients.id = 'openTagIngredients';
+			document.getElementById('tag').appendChild(open_tag_ingredients);
+	
+			const close_Tag_ingredients = document.createElement('i');
+			close_Tag_ingredients.className = 'far fa-times-circle';
+			close_Tag_ingredients.id = 'closeTagIngredients';
+			close_Tag_ingredients.addEventListener('click', function () {
+				document.getElementById('openTagIngredients').style.display = 'none';
+			});
+			document.getElementById('openTagIngredients').appendChild(close_Tag_ingredients);
 
 		const chevron = document.createElement('i');
 		chevron.className = 'fas fa-chevron-down';
@@ -103,19 +111,18 @@ class RecipesView extends Event {
 
 		const ul = document.createElement('ul');
 		ul.className = 'dropdown_ing';
-		ul.id = 'ulId';
+		ul.id = 'listIngredients';
 		document.querySelector('.open_drop').appendChild(ul);
 
 		//Create btn Appliances
 		const filter_style_appareils = document.createElement('div');
-		filter_style_appareils.className = 'filter_style appareils';
+		filter_style_appareils.className = 'filter_style appliances';
 		filter_style_appareils.id = 'div_style_appareils';
 		filter_style_appareils.addEventListener('click', e => {
-			this.event('searchChevronApp', {
+			this.event('openAppliances', {
 				recipes: recipes,
 			});
 		});
-
 		document.getElementById('section').appendChild(filter_style_appareils);
 
 		const open_dropdown_app = document.createElement('div');
@@ -137,6 +144,19 @@ class RecipesView extends Event {
 			});
 		});
 		document.getElementById('DropDivApp').appendChild(dropdown_input_app);
+		// Create Appliances Tag
+		const open_tag_appliance = document.createElement('div');
+		open_tag_appliance.className = 'open_tag appliances';
+		open_tag_appliance.id = 'openTagAppliances';
+		document.getElementById('tag').appendChild(open_tag_appliance);
+
+		const close_Tag_appliance = document.createElement('i');
+		close_Tag_appliance.className = 'far fa-times-circle';
+		close_Tag_appliance.id = 'closeTagAppliances';
+		close_Tag_appliance.addEventListener('click', function () {
+			document.getElementById('openTagAppliances').style.display = 'none';
+		});
+		document.getElementById('openTagAppliances').appendChild(close_Tag_appliance);
 
 		const dropdown_chevron_app = document.createElement('i');
 		dropdown_chevron_app.className = 'fas fa-chevron-up';
@@ -155,7 +175,7 @@ class RecipesView extends Event {
 			.appendChild(filter_style_inside_app);
 
 		const filter_input_app = document.createElement('input');
-		filter_input_app.className = 'filter_input appareils';
+		filter_input_app.className = 'filter_input appliances';
 		filter_input_app.placeholder = 'Appareils';
 		document.getElementById('filterInside').appendChild(filter_input_app);
 
@@ -165,15 +185,15 @@ class RecipesView extends Event {
 
 		const ul_app = document.createElement('ul');
 		ul_app.className = 'dropdown_app';
-		ul_app.id = 'ulIdApp';
+		ul_app.id = 'listAppliances';
 		document.getElementById('openDropApp').appendChild(ul_app);
 
-		//Ustensils
+		// Create btn Ustensils
 		const filter_style_ustensils = document.createElement('div');
-		filter_style_ustensils.className = 'filter_style ustenciles';
+		filter_style_ustensils.className = 'filter_style ustensils';
 		filter_style_ustensils.id = 'div_style_ustensils';
 		filter_style_ustensils.addEventListener('click', e => {
-			this.event('searchChevronUst', {
+			this.event('openUstensils', {
 				recipes: recipes,
 			});
 		});
@@ -198,6 +218,19 @@ class RecipesView extends Event {
 			});
 		});
 		document.getElementById('DropDivUst').appendChild(dropdown_input_ust);
+		// Create Ustensils Tag
+		const open_tag_ustensils = document.createElement('div');
+		open_tag_ustensils.className = 'open_tag ustensils';
+		open_tag_ustensils.id = 'openTagUstensils';
+		document.getElementById('tag').appendChild(open_tag_ustensils);
+
+		const close_Tag_ustensils = document.createElement('i');
+		close_Tag_ustensils.className = 'far fa-times-circle';
+		close_Tag_ustensils.id = 'closeTagUstensils';
+		close_Tag_ustensils.addEventListener('click', function () {
+			document.getElementById('openTagUstensils').style.display = 'none';
+		});
+		document.getElementById('openTagUstensils').appendChild(close_Tag_ustensils);
 
 		const dropdown_chevron_ust = document.createElement('i');
 		dropdown_chevron_ust.className = 'fas fa-chevron-up';
@@ -216,7 +249,7 @@ class RecipesView extends Event {
 			.appendChild(filter_style_inside_ust);
 
 		const filter_input_ust = document.createElement('input');
-		filter_input_ust.className = 'filter_input ustenciles';
+		filter_input_ust.className = 'filter_input ustensils';
 		filter_input_ust.placeholder = 'Ustenciles';
 		document
 			.getElementById('filterInsideUst')
@@ -228,11 +261,9 @@ class RecipesView extends Event {
 
 		const ul_ust = document.createElement('ul');
 		ul_ust.className = 'dropdown_ust';
-		ul_ust.id = 'ulIdUst';
+		ul_ust.id = 'listUstensils';
 		document.getElementById('openDropUst').appendChild(ul_ust);
-	}
-	render({ recipes }) {
-		document.getElementById('allRecipes').innerHTML = '';
+		
 		for (let i = 0; i < recipes.length; i++) {
 			const article = document.createElement('article');
 			article.classList.add('recipes');
@@ -317,10 +348,7 @@ class RecipesView extends Event {
 			document
 				.getElementById('recipes_ingredient' + i)
 				.appendChild(description);
-		}
-
-		//allRecipes(allRecipes);
 	}
 }
+}
 
-export { RecipesView };
