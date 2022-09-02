@@ -25,33 +25,7 @@ export class RecipesModel extends Event {
 		this.updatedRecipes(this.searchBar);
 	}
 
-	matchSearch(recipes) {
-		if (this.searchAppliances.lenght <= 2) {
-			// No need to search
-			return true
-		}
-		// Search name
-		if (match(tiny(recipes.name), this.search)) {
-			return true
-		}
-		// Search description
-		if (match(tiny(recipes.description), this.description)) {
-			return true
-		}
-		// Search ingredients
-		if (match(tiny(recipes.ingredients), this.ingredients)) {
-			return true
-		}
-		// Search appliances
-		if (match(tiny(recipes.appliances), this.appliances)) {
-			return true
-		}
-		// Search ustensils
-		if (match(tiny(recipes.ustensils), this.ustensils)) {
-			return true
-	}
-	return false
-}
+	
 	updatedRecipes(filter) {
 		this.filteredRecipes = [];
 		/* Looping through the array of recipes. */

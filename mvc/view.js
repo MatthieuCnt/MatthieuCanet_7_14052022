@@ -3,6 +3,7 @@ import { Event } from './utils/event.js';
 export class RecipesView extends Event {
 	constructor() {
 		super();
+		let search = "";
 	}
 	render({ recipes }) {
 
@@ -19,11 +20,13 @@ export class RecipesView extends Event {
 		input.type = 'text';
 		input.placeholder = 'Rechercher une recette';
 		input.id = 'search';
+		input.value = this.search ? this.search : "";
 
-		input.addEventListener('input', e => {
+		input.addEventListener('change', e => {
 			if (e.target.value.length >= 3) {
+				this.search = e.target.value;
 				this.event('searchBar', {
-					value: e.target.value,
+					value: this.search,
 				});
 			}
 		});
