@@ -46,7 +46,7 @@ main {
 	height: 50px;
 	width: 100%;
 	background-color: #e7e7e7;
-	border: none;
+
 	border-radius: 3px;
 	padding-left: 20px;
 }
@@ -88,7 +88,6 @@ main {
 	align-self: center;
 	right: 40px;
 }
-
 
 .filter_style {
 	cursor: pointer;

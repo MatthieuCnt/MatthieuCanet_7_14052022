@@ -12,6 +12,11 @@ export class RecipesModel extends Event {
 		this.appliances = [];
 		this.ustensils = [];
 		this.filters = { ingredients: [], appliances: [], ustensils: [] };
+		this.filteredRecipesByTag = {
+			ingredients: [],
+			appliances: [],
+			ustensils: [],
+		};
 	}
 
 	setRecipes(recipes) {
@@ -41,6 +46,7 @@ export class RecipesModel extends Event {
 				this.filteredRecipes.push(recipe);
 			} else {
 				/* A function that loops through the array of ingredients. */
+				/* Looping through the array of ingredients. */
 				recipesIngredient.some(ingredient => {
 					const ingredientLower = ingredient.ingredient.toLowerCase();
 					if (ingredientLower.includes(filter)) {
@@ -50,6 +56,9 @@ export class RecipesModel extends Event {
 				});
 			}
 		});
+		// créer tableau filteredrecipesbytagingredients
+		// si on tableau this.tags_ingredients n'est pas vide -> je boucle sur this.tags_ingredients pour chercher si l'ingrédient est dans le tableau filteredrecipes
+		// this.filteredRecipes = filteredrecipesbytagingredients
 		this.eventChange();
 	}
 
@@ -254,6 +263,7 @@ export class RecipesModel extends Event {
 	eventChange() {
 		this.event('change', {
 			recipes: this.filteredRecipes,
+			//tags_ingredients: this.tags_ingredients
 		});
 	}
 }
