@@ -3,13 +3,12 @@ import { Event } from './utils/event.js';
 export class RecipesView extends Event {
 	constructor() {
 		super();
-		let search = "";
+		let search = '';
 	}
 	render({ recipes }) {
-
-		let allIngredients = new Set()
-		let allAppliances = new Set()
-		let allUstensils = new Set()
+		let allIngredients = new Set();
+		let allAppliances = new Set();
+		let allUstensils = new Set();
 
 		document.getElementById('form').innerHTML = '';
 		document.getElementById('section').innerHTML = '';
@@ -20,7 +19,7 @@ export class RecipesView extends Event {
 		input.type = 'text';
 		input.placeholder = 'Rechercher une recette';
 		input.id = 'search';
-		input.value = this.search ? this.search : "";
+		input.value = this.search ? this.search : '';
 
 		input.addEventListener('change', e => {
 			if (e.target.value.length >= 3) {
@@ -34,6 +33,13 @@ export class RecipesView extends Event {
 
 		const search_loup = document.createElement('i');
 		search_loup.className = 'fas fa-search';
+		search_loup.value = this.search ? this.search : '';
+		search_loup.addEventListener('click', function () {
+			this.search = e.target.value;
+			this.event('searchBar', {
+				value: this.search,
+			});
+		});
 		document.getElementById('form').appendChild(search_loup);
 
 		//Create btn ingredient
@@ -94,19 +100,22 @@ export class RecipesView extends Event {
 		document
 			.querySelector('.filter_style_inside')
 			.appendChild(filter_input);
-			// Create ingredients Tag
-			const open_tag_ingredients = document.createElement('div');
-			open_tag_ingredients.className = 'open_tag ingredients';
-			open_tag_ingredients.id = 'openTagIngredients';
-			document.getElementById('tag').appendChild(open_tag_ingredients);
-	
-			const close_Tag_ingredients = document.createElement('i');
-			close_Tag_ingredients.className = 'far fa-times-circle';
-			close_Tag_ingredients.id = 'closeTagIngredients';
-			close_Tag_ingredients.addEventListener('click', function () {
-				document.getElementById('openTagIngredients').style.display = 'none';
-			});
-			document.getElementById('openTagIngredients').appendChild(close_Tag_ingredients);
+		// Create ingredients Tag
+		const open_tag_ingredients = document.createElement('div');
+		open_tag_ingredients.className = 'open_tag ingredients';
+		open_tag_ingredients.id = 'openTagIngredients';
+		document.getElementById('tag').appendChild(open_tag_ingredients);
+
+		const close_Tag_ingredients = document.createElement('i');
+		close_Tag_ingredients.className = 'far fa-times-circle';
+		close_Tag_ingredients.id = 'closeTagIngredients';
+		close_Tag_ingredients.addEventListener('click', function () {
+			document.getElementById('openTagIngredients').style.display =
+				'none';
+		});
+		document
+			.getElementById('openTagIngredients')
+			.appendChild(close_Tag_ingredients);
 
 		const chevron = document.createElement('i');
 		chevron.className = 'fas fa-chevron-down';
@@ -159,7 +168,9 @@ export class RecipesView extends Event {
 		close_Tag_appliance.addEventListener('click', function () {
 			document.getElementById('openTagAppliances').style.display = 'none';
 		});
-		document.getElementById('openTagAppliances').appendChild(close_Tag_appliance);
+		document
+			.getElementById('openTagAppliances')
+			.appendChild(close_Tag_appliance);
 
 		const dropdown_chevron_app = document.createElement('i');
 		dropdown_chevron_app.className = 'fas fa-chevron-up';
@@ -233,7 +244,9 @@ export class RecipesView extends Event {
 		close_Tag_ustensils.addEventListener('click', function () {
 			document.getElementById('openTagUstensils').style.display = 'none';
 		});
-		document.getElementById('openTagUstensils').appendChild(close_Tag_ustensils);
+		document
+			.getElementById('openTagUstensils')
+			.appendChild(close_Tag_ustensils);
 
 		const dropdown_chevron_ust = document.createElement('i');
 		dropdown_chevron_ust.className = 'fas fa-chevron-up';
@@ -266,7 +279,7 @@ export class RecipesView extends Event {
 		ul_ust.className = 'dropdown_ust';
 		ul_ust.id = 'listUstensils';
 		document.getElementById('openDropUst').appendChild(ul_ust);
-		
+
 		for (let i = 0; i < recipes.length; i++) {
 			const article = document.createElement('article');
 			article.classList.add('recipes');
@@ -351,7 +364,6 @@ export class RecipesView extends Event {
 			document
 				.getElementById('recipes_ingredient' + i)
 				.appendChild(description);
+		}
 	}
 }
-}
-

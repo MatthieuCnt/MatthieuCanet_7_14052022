@@ -1,5 +1,5 @@
 import { Event } from './utils/event.js';
-import { match, tiny } from './utils/utils.js'
+import { match, tiny } from './utils/utils.js';
 
 export class RecipesModel extends Event {
 	constructor() {
@@ -11,7 +11,7 @@ export class RecipesModel extends Event {
 		this.ingredients = [];
 		this.appliances = [];
 		this.ustensils = [];
-		this.filters = { ingredients: [], appliances: [], ustensils: [] }
+		this.filters = { ingredients: [], appliances: [], ustensils: [] };
 	}
 
 	setRecipes(recipes) {
@@ -25,7 +25,6 @@ export class RecipesModel extends Event {
 		this.updatedRecipes(this.searchBar);
 	}
 
-	
 	updatedRecipes(filter) {
 		this.filteredRecipes = [];
 		/* Looping through the array of recipes. */
@@ -72,11 +71,14 @@ export class RecipesModel extends Event {
 				if (ingredientLower.includes(filter)) {
 					var li = document.createElement('li');
 					li.addEventListener('click', function () {
-						var closeTag = document.getElementById('closeTagIngredients'),
-							openTag = document.getElementById('openTagIngredients');
+						var closeTag = document.getElementById(
+								'closeTagIngredients',
+							),
+							openTag =
+								document.getElementById('openTagIngredients');
 
 						openTag.style.display = 'block';
-						openTag.innerHTML = twice[i];
+						openTag.innerHTML = li[i];
 						openTag.appendChild(closeTag);
 					});
 					li.appendChild(document.createTextNode(twice[i]));
@@ -101,9 +103,13 @@ export class RecipesModel extends Event {
 					if (ingredientLower.includes(filter)) {
 						var li = document.createElement('li');
 						li.addEventListener('click', function () {
-							var closeTag = document.getElementById('closeTagAppliance'),
-							openTag = document.getElementById('openTagAppliance');
-							
+							var closeTag =
+									document.getElementById(
+										'closeTagAppliance',
+									),
+								openTag =
+									document.getElementById('openTagAppliance');
+
 							openTag.style.display = 'block';
 							openTag.innerHTML = twice[i];
 							openTag.appendChild(closeTag);
@@ -134,9 +140,11 @@ export class RecipesModel extends Event {
 				if (ingredientLower.includes(filter)) {
 					var li = document.createElement('li');
 					li.addEventListener('click', function () {
-						var closeTagUstensils = document.getElementById('closeTagUstensils'),
-						 openTagUstensils = document.getElementById('openTagUstensils');
-						
+						var closeTagUstensils =
+								document.getElementById('closeTagUstensils'),
+							openTagUstensils =
+								document.getElementById('openTagUstensils');
+
 						openTagUstensils.style.display = 'block';
 						openTagUstensils.innerHTML = twice[i];
 						openTagUstensils.appendChild(closeTagUstensils);
@@ -164,10 +172,13 @@ export class RecipesModel extends Event {
 			var twice = Array.from(new Set(this.ingredients));
 			for (let i = 0; i < twice.length; i++) {
 				var li = document.createElement('li');
-				
+
 				li.addEventListener('click', function () {
-					var openTagIngredients = document.getElementById('openTagIngredients'),
-				    closeTagIngredients = document.getElementById('closeTagIngredients');
+					var openTagIngredients =
+							document.getElementById('openTagIngredients'),
+						closeTagIngredients = document.getElementById(
+							'closeTagIngredients',
+						);
 
 					openTagIngredients.style.display = 'block';
 					openTagIngredients.innerHTML = this.click;
@@ -193,8 +204,10 @@ export class RecipesModel extends Event {
 			for (let i = 0; i < twice.length; i++) {
 				var li = document.createElement('li');
 				li.addEventListener('click', function () {
-					var openTagAppliances = document.getElementById('openTagAppliances'),
-				    closeTagAppliances = document.getElementById('closeTagAppliances');
+					var openTagAppliances =
+							document.getElementById('openTagAppliances'),
+						closeTagAppliances =
+							document.getElementById('closeTagAppliances');
 
 					openTagAppliances.style.display = 'block';
 					openTagAppliances.innerHTML = this.click;
@@ -223,8 +236,10 @@ export class RecipesModel extends Event {
 			for (let i = 0; i < twice.length; i++) {
 				var li = document.createElement('li');
 				li.addEventListener('click', function () {
-					var openTagUstensils = document.getElementById('openTagUstensils'),
-				    closeTagUstensils = document.getElementById('closeTagUstensils');
+					var openTagUstensils =
+							document.getElementById('openTagUstensils'),
+						closeTagUstensils =
+							document.getElementById('closeTagUstensils');
 
 					openTagUstensils.style.display = 'block';
 					openTagUstensils.innerHTML = this.click;
@@ -242,4 +257,3 @@ export class RecipesModel extends Event {
 		});
 	}
 }
-
