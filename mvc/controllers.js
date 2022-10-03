@@ -2,10 +2,10 @@ import { RecipesModel } from './model.js';
 import { RecipesView } from './view.js';
 
 export class RecipesController {
-/**
- * @param { RecipesModel } model
- * @param { RecipesView } view
- */
+	/**
+	 * @param { RecipesModel } model
+	 * @param { RecipesView } view
+	 */
 	constructor(model, view) {
 		this.model = model;
 		this.view = view;
@@ -13,15 +13,19 @@ export class RecipesController {
 		model.on('change', data => view.render(data));
 
 		view.on('searchBar', ({ value }) => model.searchRecipes(value));
-		view.on('openIngredients', recipes => model.openIngredients(recipes));
+		view.on('openDropIngredients', recipes =>
+			model.openDropIngredients(recipes),
+		);
 		view.on('searchIngredients', ({ value }) =>
-			model.searchIngredients(value)),
+			model.searchIngredients(value),
+		),
+			view.on('openTag', ({ recipes }) => model.openTag(recipes));
 		view.on('openAppliances', recipes => model.openAppliances(recipes));
 		view.on('searchAppliances', ({ value }) =>
 			model.searchAppliances(value),
 		);
 		view.on('openUstensils', recipes => model.openUstensils(recipes));
-		view.on('searchUstensils', ({ value }) => model.searchUstensils(value))
+		view.on('searchUstensils', ({ value }) => model.searchUstensils(value));
 	}
 	load() {
 		/* Fetching the data from the json file. */
@@ -31,9 +35,8 @@ export class RecipesController {
 				console.log(recipes);
 				this.model.setRecipes(recipes);
 			})
-			.catch((error) => {
-				console.error(error)
-			})
+			.catch(error => {
+				console.error(error);
+			});
 	}
 }
-

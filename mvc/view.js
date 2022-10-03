@@ -9,6 +9,7 @@ export class RecipesView extends Event {
 		let allIngredients = new Set();
 		let allAppliances = new Set();
 		let allUstensils = new Set();
+		this.tagsIngredients = [];
 
 		document.getElementById('form').innerHTML = '';
 		document.getElementById('section').innerHTML = '';
@@ -47,7 +48,7 @@ export class RecipesView extends Event {
 		filter_style.className = 'filter_style ingredients';
 		filter_style.id = 'div_style';
 		filter_style.addEventListener('click', e => {
-			this.event('openIngredients', {
+			this.event('openDropIngredients', {
 				recipes: recipes,
 			});
 		});
@@ -126,6 +127,21 @@ export class RecipesView extends Event {
 		ul.id = 'listIngredients';
 		document.querySelector('.open_drop').appendChild(ul);
 
+		for (let i = 0; i < recipes.length; i++) {
+			/* recipe affichage */
+			for (let j = 0; j < recipes[i].ingredients.length; j++) {
+				const li = document.createElement('li');
+				li.className = 'li';
+				li.id = 'liId';
+				li.innerHTML = recipes[i].ingredients[j].ingredient;
+				li.addEventListener('click', function () {
+					this.event('openTag', {
+						value: recipes[i],
+					});
+				});
+				document.querySelector('.dropdown_ing').appendChild(li);
+			}
+		}
 		//Create btn Appliances
 		const filter_style_appareils = document.createElement('div');
 		filter_style_appareils.className = 'filter_style appliances';

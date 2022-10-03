@@ -6,7 +6,6 @@ export class RecipesModel extends Event {
 		/* Calling the constructor of the parent class. */
 		super();
 		this.allRecipes = [];
-		this.searchBar;
 		this.filteredRecipes = [];
 		this.ingredients = [];
 		this.appliances = [];
@@ -17,6 +16,8 @@ export class RecipesModel extends Event {
 			appliances: [],
 			ustensils: [],
 		};
+		this.tagsIngredients = [];
+		this.filteredrecipesbytagingredients = [];
 	}
 
 	setRecipes(recipes) {
@@ -45,8 +46,6 @@ export class RecipesModel extends Event {
 			} else if (recipesDescription.includes(filter)) {
 				this.filteredRecipes.push(recipe);
 			} else {
-				/* A function that loops through the array of ingredients. */
-				/* Looping through the array of ingredients. */
 				recipesIngredient.some(ingredient => {
 					const ingredientLower = ingredient.ingredient.toLowerCase();
 					if (ingredientLower.includes(filter)) {
@@ -56,6 +55,16 @@ export class RecipesModel extends Event {
 				});
 			}
 		});
+		/*if (this.tagsIngredients == null) {
+			this.tagsIngredients.forEach(recipe => {
+				recipe.ingredients.forEach(ingredient => {
+					this.filters.ingredients.push(ingredient.ingredient);
+				});
+			});
+			if (ingredientLower.includes(filter)) {
+				this.filteredRecipes.push(recipe);
+				return true;
+			}*/
 		// créer tableau filteredrecipesbytagingredients
 		// si on tableau this.tags_ingredients n'est pas vide -> je boucle sur this.tags_ingredients pour chercher si l'ingrédient est dans le tableau filteredrecipes
 		// this.filteredRecipes = filteredrecipesbytagingredients
@@ -78,8 +87,7 @@ export class RecipesModel extends Event {
 			for (let i = 0; i < twice.length; i++) {
 				const ingredientLower = twice[i].toLowerCase();
 				if (ingredientLower.includes(filter)) {
-					var li = document.createElement('li');
-					li.addEventListener('click', function () {
+					/*li.addEventListener('click', function () {
 						var closeTag = document.getElementById(
 								'closeTagIngredients',
 							),
@@ -91,7 +99,7 @@ export class RecipesModel extends Event {
 						openTag.appendChild(closeTag);
 					});
 					li.appendChild(document.createTextNode(twice[i]));
-					ul.appendChild(li);
+					ul.appendChild(li);*/
 				}
 			}
 		}
@@ -165,7 +173,7 @@ export class RecipesModel extends Event {
 		}
 		this.eventChange();
 	}
-	openIngredients(recipes) {
+	openDropIngredients(recipes) {
 		recipes.recipes.forEach(recipe => {
 			recipe.ingredients.forEach(ingredient => {
 				this.ingredients.push(ingredient.ingredient);
@@ -173,30 +181,9 @@ export class RecipesModel extends Event {
 		});
 		document.getElementById('div_style').style.display = 'none';
 		document.getElementById('openDrop').style.display = 'block';
+		var twice = Array.from(new Set(this.ingredients));
 
-		var ul = document.getElementById('listIngredients');
-
-		if (ul == null) {
-		} else {
-			var twice = Array.from(new Set(this.ingredients));
-			for (let i = 0; i < twice.length; i++) {
-				var li = document.createElement('li');
-
-				li.addEventListener('click', function () {
-					var openTagIngredients =
-							document.getElementById('openTagIngredients'),
-						closeTagIngredients = document.getElementById(
-							'closeTagIngredients',
-						);
-
-					openTagIngredients.style.display = 'block';
-					openTagIngredients.innerHTML = this.click;
-					openTagIngredients.appendChild(closeTagIngredients);
-				});
-				li.appendChild(document.createTextNode(twice[i]));
-				ul.appendChild(li);
-			}
-		}
+		return twice;
 	}
 	openAppliances(recipes) {
 		recipes.recipes.forEach(recipe => {
@@ -260,6 +247,27 @@ export class RecipesModel extends Event {
 			}
 		}
 	}
+
+	openTag(recipes) {
+		this.tagsIngredients = [];
+		recipes.recipes.forEach(recipe => {
+			recipe.ingredients.forEach(ingredient => {
+				/* Pushing the ingredient into the ingredients array. */
+				this.ingredients.push(ingredient.ingredient);
+			});
+		});
+		console.log(this.ingredients);
+		var closeTag = document.getElementById('closeTagIngredients'),
+			openTag = document.getElementById('openTagIngredients');
+
+		openTag.style.display = 'block';
+		openTag.innerHTML = li[i];
+		openTag.appendChild(closeTag);
+
+		li.appendChild(document.createTextNode(twice[i]));
+		ul.appendChild(li);
+	}
+
 	eventChange() {
 		this.event('change', {
 			recipes: this.filteredRecipes,
