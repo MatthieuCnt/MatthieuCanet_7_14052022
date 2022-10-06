@@ -10,6 +10,7 @@ export class RecipesView extends Event {
 		let allAppliances = new Set();
 		let allUstensils = new Set();
 		this.tagsIngredients = [];
+		gg le gros
 
 		document.getElementById('form').innerHTML = '';
 		document.getElementById('section').innerHTML = '';
