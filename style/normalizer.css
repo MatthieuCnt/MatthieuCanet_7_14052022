@@ -2,7 +2,7 @@
 *,
 *::before,
 *::after {
-	box-sizing: none;
+	box-sizing: border-box;
 }
 
 /* Remove default margin */

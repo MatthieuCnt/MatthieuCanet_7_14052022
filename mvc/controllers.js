@@ -18,13 +18,16 @@ export class RecipesController {
 		);
 		view.on('searchIngredients', ({ value }) =>
 			model.searchIngredients(value),
-		),
-			view.on('openTag', ({ recipes }) => model.openTag(recipes));
-		view.on('openAppliances', recipes => model.openAppliances(recipes));
+		);
+		
+		view.on('openTag', ({ value, filter}) => model.openTag(value, filter));
+		view.on('openTagAppliances', ({ value, filter}) => model.openTagAppliances(value, filter));
+		view.on('openTagUstensils', ({ value, filter}) => model.openTagUstensils(value, filter));
+		view.on('openDropAppliances', recipes => model.openDropAppliances(recipes));
 		view.on('searchAppliances', ({ value }) =>
 			model.searchAppliances(value),
 		);
-		view.on('openUstensils', recipes => model.openUstensils(recipes));
+		view.on('openDropUstensils', recipes => model.openDropUstensils(recipes));
 		view.on('searchUstensils', ({ value }) => model.searchUstensils(value));
 	}
 	load() {

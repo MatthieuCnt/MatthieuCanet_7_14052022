@@ -84,9 +84,9 @@ main {
 
 .fas.fa-search {
 	font-size: 25px;
-	position: relative;
+	position: absolute;
 	align-self: center;
-	right: 40px;
+	right: 55px;
 }
 
 .filter_style {
@@ -137,6 +137,16 @@ main {
 }
 
 .filter_style_inside {
+	display: flex;
+	justify-content: space-between;
+}
+
+.filter_style_inside_app {
+	display: flex;
+	justify-content: space-between;
+}
+
+.filter_style_inside_ust {
 	display: flex;
 	justify-content: space-between;
 }
