@@ -85,13 +85,13 @@ main {
 .fas.fa-search {
 	font-size: 25px;
 	position: absolute;
+right: 100px;
 	align-self: center;
-	right: 55px;
+	
 }
 
 .filter_style {
 	cursor: pointer;
-	width: 120px;
 	position: relative;
 	display: flex;
 	align-items: center;

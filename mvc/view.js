@@ -12,6 +12,10 @@ export class RecipesView extends Event {
 		let tagsIngredients = [];
 		let tagsAppliances = [];
 		let tagsUstensils = [];
+		let searchFilter_temp = "";
+		let valueing_temp = "";
+		let valueapp_temp = "";
+		let valueust_temp = "";
 
 		recipes.forEach(recipe => {
 			recipe.ingredients.forEach(ingredient => {
@@ -99,9 +103,11 @@ export class RecipesView extends Event {
 		open_dropdown_input.className = 'filter_input_drop';
 		open_dropdown_input.placeholder = 'Rechercher un ingredient';
 		open_dropdown_input.addEventListener('input', e => {
+			if (e.target.value.length >= 3) {
 			this.event('searchIngredients', {
 				value: e.target.value,
 			});
+			}
 		});
 		document
 			.querySelector('.filter_style_inside')
@@ -146,9 +152,19 @@ export class RecipesView extends Event {
 			document.getElementById('openTagIngredients').style.display =
 				'none'
 				tagsIngredients = [];
-				this.event('searchBar', {
-					value: '',
-				});
+				//if (document.getElementById('').innerText != null) {this.search ajouter if avec le searchbar push this.search
+				if (document.getElementById('openTagAppliances').innerText != null) {tagsAppliances.push(document.getElementById('openTagAppliances').innerText);}
+				if (document.getElementById('openTagUstensils').innerText != null) {tagsUstensils.push(document.getElementById('openTagUstensils').innerText);}
+				if (tagsIngredients.length != 0) {valueing_temp = tagsIngredients[0];}
+					if (tagsAppliances.length != 0) {valueapp_temp = tagsAppliances[0];}
+					if (tagsUstensils.length != 0) {valueust_temp = tagsUstensils[0];}
+					if (this.search != null) {searchFilter_temp = this.search;}
+					this.event('searchBar', {
+						value: valueing_temp.toLowerCase(),
+						valueapp: valueapp_temp.toLowerCase(),
+						valueust: valueust_temp.toLowerCase(),
+						searchFilter : searchFilter_temp.toLowerCase(),
+					});
 		});
 		document
 			.getElementById('openTagIngredients')
@@ -171,14 +187,23 @@ export class RecipesView extends Event {
 				li.innerHTML = allIngredients[i];
 				li.addEventListener('click', e => {
 					tagsIngredients.push(li.innerHTML);
+					if (document.getElementById('openTagAppliances').innerText != null) {tagsAppliances.push(document.getElementById('openTagAppliances').innerText);}
+					if (document.getElementById('openTagUstensils').innerText != null) {tagsUstensils.push(document.getElementById('openTagUstensils').innerText);}
 					console.log(tagsIngredients);
 					this.event('openTag', {
 						value: recipes,
 						filter: tagsIngredients
 					});
+					if (tagsIngredients.length != 0) {valueing_temp = tagsIngredients[0];}
+					if (tagsAppliances.length != 0) {valueapp_temp = tagsAppliances[0];}
+					if (tagsUstensils.length != 0) {valueust_temp = tagsUstensils[0];}
+					if (this.search != null) {searchFilter_temp = this.search;}
 					this.event('searchBar', {
-							value: tagsIngredients[0].toLowerCase(),
-						});
+						value: valueing_temp.toLowerCase(),
+						valueapp: valueapp_temp.toLowerCase(),
+						valueust: valueust_temp.toLowerCase(),
+						searchFilter : searchFilter_temp.toLowerCase(),
+					});
 				});
 				document.querySelector('.dropdown_ing').appendChild(li);
 			
@@ -275,13 +300,22 @@ export class RecipesView extends Event {
 				li_app.innerHTML = allAppliances[i];
 				li_app.addEventListener('click', e => {
 					tagsAppliances.push(li_app.innerHTML);
+					if (document.getElementById('openTagIngredients').innerText != null) {tagsIngredients.push(document.getElementById('openTagIngredients').innerText);}
+					if (document.getElementById('openTagUstensils').innerText != null) {tagsUstensils.push(document.getElementById('openTagUstensils').innerText);}
 					console.log(tagsAppliances);
 					this.event('openTagAppliances', {
 						value: recipes,
 						filter: tagsAppliances
 					});
+					if (tagsIngredients.length != 0) {valueing_temp = tagsIngredients[0];}
+					if (tagsAppliances.length != 0) {valueapp_temp = tagsAppliances[0];}
+					if (tagsUstensils.length != 0) {valueust_temp = tagsUstensils[0];}
+					if (this.search != null) {searchFilter_temp = this.search;}
 					this.event('searchBar', {
-						value: tagsAppliances[0].toLowerCase(),
+						value: valueing_temp.toLowerCase(),
+						valueapp: valueapp_temp.toLowerCase(),
+						valueust: valueust_temp.toLowerCase(),
+						searchFilter : searchFilter_temp.toLowerCase(),
 					});
 				});
 				document.querySelector('.dropdown_app').appendChild(li_app);
@@ -378,13 +412,22 @@ document
 				li_ust.innerHTML = allUstensils[i];
 				li_ust.addEventListener('click', e => {
 					tagsUstensils.push(li_ust.innerHTML);
+					if (document.getElementById('openTagIngredients').innerText != null) {tagsIngredients.push(document.getElementById('openTagIngredients').innerText);}
+					if (document.getElementById('openTagAppliances').innerText != null) {tagsAppliances.push(document.getElementById('openTagAppliances').innerText);}
 					console.log(tagsUstensils);
 					this.event('openTagUstensils', {
 						value: recipes,
 						filter: tagsUstensils
 					});
+					if (tagsIngredients.length != 0) {valueing_temp = tagsIngredients[0];}
+					if (tagsAppliances.length != 0) {valueapp_temp = tagsAppliances[0];}
+					if (tagsUstensils.length != 0) {valueust_temp = tagsUstensils[0];}
+					if (this.search != null) {searchFilter_temp = this.search;}
 					this.event('searchBar', {
-						value: tagsUstensils[0].toLowerCase(),
+						value: valueing_temp.toLowerCase(),
+						valueapp: valueapp_temp.toLowerCase(),
+						valueust: valueust_temp.toLowerCase(),
+						searchFilter : searchFilter_temp.toLowerCase(),
 					});
 				});
 				document.querySelector('.dropdown_ust').appendChild(li_ust);

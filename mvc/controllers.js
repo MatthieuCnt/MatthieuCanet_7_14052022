@@ -12,7 +12,7 @@ export class RecipesController {
 		/* Listening for the change event and then rendering the recipes. */
 		model.on('change', data => view.render(data));
 
-		view.on('searchBar', ({ value }) => model.searchRecipes(value));
+		view.on('searchBar', ({ value, valueapp, valueust, searchFilter }) => model.searchRecipes(value, valueapp, valueust, searchFilter));
 		view.on('openDropIngredients', recipes =>
 			model.openDropIngredients(recipes),
 		);
