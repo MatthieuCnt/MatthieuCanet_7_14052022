@@ -105,6 +105,8 @@ right: 100px;
 
 .open_drop {
 	display: none;
+	position: absolute;
+	overflow: hidden;
 	width: 42rem;
 	padding: 0 10px;
 	border-radius: 3px;
@@ -116,6 +118,8 @@ right: 100px;
 
 .open_drop_app {
 	display: none;
+	position: absolute;
+	overflow: hidden;
 	width: 42rem;
 	padding: 0 10px;
 	border-radius: 3px;
@@ -127,6 +131,8 @@ right: 100px;
 
 .open_drop_ust {
 	display: none;
+	position: absolute;
+	overflow: hidden;
 	width: 42rem;
 	padding: 0 10px;
 	border-radius: 3px;
@@ -225,6 +231,14 @@ li {
 	align-items: center;
 	margin-right: 20px;
 	align-self: center;
+}
+
+.sectionError {
+	padding-top: 20px;
+}
+
+.error {
+	display: block;
 }
 
 .all_recipes {
