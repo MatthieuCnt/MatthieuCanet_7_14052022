@@ -90,9 +90,8 @@ export class RecipesModel extends Event {
 				this.filteredRecipes3.push(recipe);
 			} else if ( recipe.name.toLowerCase().includes(tagFilterApp) || recipe.description.toLowerCase().includes(tagFilterApp) || recipe.appliance.toLowerCase().includes(tagFilterApp)) {
 				this.filteredRecipes3.push(recipe);
-			} 
-						return true;
-					});
+			} 	
+		});
 		/* Looping through the array of this.filteredRecipes3. boucle4 sur tagFilterUst*/
 		this.filteredRecipes3.forEach(recipe => {
 			if (tagFilterUst == null) {
