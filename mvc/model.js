@@ -41,7 +41,8 @@ export class RecipesModel extends Event {
 		this.filteredRecipes2 = [];
 		this.filteredRecipes3 = [];
 		/* Looping through the array of all recipes. boucle1 sur filter*/
-		this.allRecipes.forEach(recipe => {
+		for(let i = 0; i < this.allRecipes.length; i++){
+			var recipe = this.allRecipes[i];
 			if (filter == null) {
 				this.filteredRecipes1.push(recipe);
 			} else if (recipe.name.toLowerCase().includes(filter) || recipe.description.toLowerCase().includes(filter)) {
@@ -67,9 +68,11 @@ export class RecipesModel extends Event {
 					}
 				});
 			}
-		});
+		};
 		/* Looping through the array of this.filteredRecipes1. boucle2 sur tagFilterIng*/
-		this.filteredRecipes1.forEach(recipe => {
+		//this.filteredRecipes1.forEach(recipe => {
+		for(let i = 0; i < this.filteredRecipes1.length; i++){
+			var recipe = this.filteredRecipes1[i];
 			if (tagFilterIng == null) {
 				this.filteredRecipes2.push(recipe);
 			} else if (recipe.name.toLowerCase().includes(tagFilterIng) || recipe.description.toLowerCase().includes(tagFilterIng)) {
@@ -83,18 +86,20 @@ export class RecipesModel extends Event {
 					}
 				});
 			}
-		});
+		};
 		/* Looping through the array of this.filteredRecipes2. boucle3 sur tagFilterApp*/
-		this.filteredRecipes2.forEach(recipe => {
+		
+		for(let i = 0; i < this.filteredRecipes2.length; i++){
+			var recipe = this.filteredRecipes2[i];
 			if (tagFilterApp == null) {
 				this.filteredRecipes3.push(recipe);
 			} else if ( recipe.name.toLowerCase().includes(tagFilterApp) || recipe.description.toLowerCase().includes(tagFilterApp) || recipe.appliance.toLowerCase().includes(tagFilterApp)) {
 				this.filteredRecipes3.push(recipe);
 			} 
-						return true;
-					});
+		};
 		/* Looping through the array of this.filteredRecipes3. boucle4 sur tagFilterUst*/
-		this.filteredRecipes3.forEach(recipe => {
+		for(let i = 0; i < this.filteredRecipes3.length; i++){
+			var recipe = this.filteredRecipes3[i];
 			if (tagFilterUst == null) {
 				this.filteredRecipes.push(recipe);
 			} else if (recipe.name.toLowerCase().includes(tagFilterUst) || recipe.description.toLowerCase().includes(tagFilterUst)) {
@@ -106,7 +111,7 @@ export class RecipesModel extends Event {
 					}
 				});
 			}
-		});
+		};
 		this.eventChange();
 	}
 openDropIngredients(recipes) {
